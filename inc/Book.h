@@ -10,7 +10,6 @@ private:
   bool isAvailable;
 
 public:
-  // Constructor
   Book();
   Book(std::string title, std::string author);
   Book(std::string title, std::string author, bool isAvailable);
@@ -24,6 +23,8 @@ public:
 
   std::string getAuthor();
   void setAuthor(std::string author);
+
+  friend std::ostream &operator<<(std::ostream &os, const Book &obj);
 };
 
 #endif

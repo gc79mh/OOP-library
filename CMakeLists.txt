@@ -27,10 +27,10 @@ set(TESTS
 add_executable(essa ${SOURCES} ./src/main.cpp)
 
 # Test executable
-add_executable(tests ${TESTS} ${SOURCES})
+add_executable(essa_tests ${TESTS} ${SOURCES})
 
 # Link Google Test for the tests
-target_link_libraries(tests GTest::GTest GTest::Main pthread)
+target_link_libraries(essa_tests GTest::GTest GTest::Main pthread)
 
 # Enable testing with CTest
 enable_testing()

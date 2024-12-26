@@ -1,17 +1,35 @@
 cmake_minimum_required(VERSION 3.10)
-project(UnitTests)
+project(Library)
+
+# C++ standard
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Add Google Test
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
+if(NOT GTest_FOUND)
+  message(FATAL_ERROR "Google Test not found!")
+endif()
 
 # Add your source files
 set(SOURCES
-  ./library/src/hello.cpp    
+  ./src/Book.cpp
 )
-   
-add_executable(essa ${SOURCES})
 
-# Link Google Test
-target_link_libraries(essa ${GTEST_LIBRARIES} pthread)
+set(TESTS
+  ./tests/BookTest.cpp    
+)
 
+# Main application executable
+add_executable(essa ${SOURCES} ./src/main.cpp)
+
+# Test executable
+add_executable(tests ${TESTS} ${SOURCES})
+
+# Link Google Test for the tests
+target_link_libraries(tests GTest::GTest GTest::Main pthread)
+
+# Enable testing with CTest
+enable_testing()
+add_test(NAME BookTests COMMAND tests)

@@ -1,4 +1,4 @@
-#ifndef BOOK_H 
+#ifndef BOOK_H
 #define BOOK_H
 
 #include <string>
@@ -12,17 +12,17 @@ private:
 public:
   // Constructor
   Book();
+  Book(std::string title, std::string author);
   ~Book();
-  
+
   bool checkAvailability();
   void changeAvailability();
-  
-  std::string getTitle ();
-  void setTitle (std::string);
-  
-  std::string getAuthor ();
-  void setAuthor (std::string);
 
+  std::string getTitle();
+  void setTitle(std::string title);
+
+  std::string getAuthor();
+  void setAuthor(std::string author);
 };
 
-#endif 
+#endif

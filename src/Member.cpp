@@ -42,6 +42,7 @@ std::ostream &operator<<(std::ostream &os, const Member &obj) {
       os << i+1 << ": ";
       os << obj.checkBooks()[i].getTitle() << " - ";
       os << obj.checkBooks()[i].getAuthor();
+      if (i < obj.checkBooks().size() - 1) os << std::endl;
     }
   }
   return os;

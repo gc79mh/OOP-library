@@ -1,14 +1,21 @@
 #include "../inc/Book.h"
-#include <memory>
 
 Book::Book() {
   this->title = "Unknown";
   this->author = "Unknown";
+  this->isAvailable = true;
 }
 
 Book::Book(std::string title, std::string author) {
   this->title = title;
   this->author = author;
+  this->isAvailable = true;
+}
+
+Book::Book(std::string title, std::string author, bool isAvailable) {
+  this->title = title;
+  this->author = author;
+  this->isAvailable = isAvailable;
 }
 
 Book::~Book() {}

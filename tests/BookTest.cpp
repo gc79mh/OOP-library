@@ -1,23 +1,23 @@
 #include <gtest/gtest.h>
 #include "../inc/Book.h"
 
-// Test the default constructor
 TEST(BookTest, DefaultConstructor) {
     Book book;
-    // Verify initial state (assuming Book has some getters for title/author)
     EXPECT_EQ(book.getTitle(), "Unknown");
     EXPECT_EQ(book.getAuthor(), "Unknown");
 }
 
-// Test parameterized constructor (if any)
-// For example, assuming there's a constructor Book(std::string title, std::string author)
 TEST(BookTest, ParameterizedConstructor) {
-    Book book("1984", "George Orwell");
-    EXPECT_EQ(book.getTitle(), "1984");
-    EXPECT_EQ(book.getAuthor(), "George Orwell");
+    Book book1("1984", "George Orwell");
+    EXPECT_EQ(book1.getTitle(), "1984");
+    EXPECT_EQ(book1.getAuthor(), "George Orwell");
+    
+    Book book2("The Hobbit", "J.R.R. Tolkien", false);
+    EXPECT_EQ(book2.getTitle(), "The Hobbit");
+    EXPECT_EQ(book2.getAuthor(), "J.R.R. Tolkien");
+    EXPECT_EQ(book2.checkAvailability(), false);
 }
 
-// Test assignment operator
 TEST(BookTest, AssignmentOperator) {
     Book book1("1984", "George Orwell");
     Book book2;

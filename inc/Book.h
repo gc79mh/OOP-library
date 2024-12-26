@@ -13,6 +13,7 @@ public:
   // Constructor
   Book();
   Book(std::string title, std::string author);
+  Book(std::string title, std::string author, bool isAvailable);
   ~Book();
 
   bool checkAvailability();

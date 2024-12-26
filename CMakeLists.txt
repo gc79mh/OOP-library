@@ -15,10 +15,12 @@ endif()
 # Add your source files
 set(SOURCES
   ./src/Book.cpp
+  ./src/Member.cpp
 )
 
 set(TESTS
-  ./tests/BookTest.cpp    
+  ./tests/BookTest.cpp
+  ./tests/MemberTest.cpp
 )
 
 # Main application executable

@@ -2,6 +2,7 @@
 #define BOOK_H
 
 #include <string>
+#include <iostream>
 
 class Book {
 private:
@@ -10,8 +11,6 @@ private:
   bool isAvailable;
 
 public:
-  // Constructor
-  Book();
   Book(std::string title, std::string author);
   Book(std::string title, std::string author, bool isAvailable);
   ~Book();
@@ -19,11 +18,12 @@ public:
   bool checkAvailability();
   void changeAvailability();
 
-  std::string getTitle();
-  void setTitle(std::string title);
+  std::string getTitle() const;
 
-  std::string getAuthor();
-  void setAuthor(std::string author);
+  std::string getAuthor() const;
+
+  friend std::ostream &operator<<(std::ostream &os, const Book &obj);
+  friend bool operator==(const Book& lhs, const Book& rhs);
 };
 
 #endif

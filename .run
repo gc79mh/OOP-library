@@ -1,8 +1,0 @@
-#!/bin/bash
-mkdir build
-cd build
-cmake ..
-make
-./essa
-cd ..
-rm -fr ./build

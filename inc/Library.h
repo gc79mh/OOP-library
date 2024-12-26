@@ -4,6 +4,7 @@
 #include "Book.h"
 #include "Member.h"
 #include <iostream>
+#include <string>
 #include <vector>
 
 class Library {
@@ -16,10 +17,13 @@ public:
   ~Library();
 
   void addBook(Book book);
+  void addBook(std::string title, std::string author);
   void removeBook(Book book);
-
-  void registerMember(Member member);
-  void removeMember(Member member);
+  void removeBook(std::string title, std::string author);
+  
+  std::vector<Member> showMembers();
+  void registerNewMember(std::string name, std::string surname);
+  void removeMember(int memberId);
 
   friend std::ostream &operator<<(std::ostream &os, const Library &obj);
 };

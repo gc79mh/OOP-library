@@ -7,17 +7,16 @@
 class Member {
 private:
   int memberId;
-  std::vector<Book> borrowBooks;
+  std::vector<Book> borrowedBooks;
 
 public:
-  Member();
+  Member(int memberId);
   ~Member();
 
-  void borrowBook(Book);
-  void returnBook(Book);
+  void borrowBook(Book book);
+  void returnBook(Book book);
 
   int getMemberId();
-  void setMemberId(int);
 
   friend std::ostream &operator<<(std::ostream &os, const Member &obj);
 };

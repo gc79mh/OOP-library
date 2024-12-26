@@ -1,8 +1,14 @@
 #include <iostream>
 
-#include "../inc/Book.h"
+#include "../inc/Member.h"
 
-int main() { 
-  std::cout << "es" << std::endl;
+int main() {
+  Member admin(1);
+  Book book("1984", "Orwell");
+
+  admin.borrowBook(book);
+  std::cout << admin << std::endl;
+
+
   return 0;
 }

@@ -14,7 +14,7 @@ public:
   Member(int memberId);
   ~Member();
 
-  std::vector<Book> checkBooks();
+  std::vector<Book> checkBooks() const;
   void borrowBook(Book book);
   void returnBook(Book book);
   

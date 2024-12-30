@@ -20,6 +20,7 @@ void DebugPrinter::Print(Library& library) {
   auto users = library.getUsers();
   for (auto user : users) {
     Print(user);
+    std::cout << "Class: " << user->getType() << std::endl;
   }
 
   std::cout << std::endl;

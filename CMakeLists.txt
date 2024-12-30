@@ -39,6 +39,7 @@ set(SOURCES
   ./src/User.cpp
   ./src/Member.cpp
   ./src/Library.cpp
+  ./src/Worker.cpp
 )
 
 # Test files

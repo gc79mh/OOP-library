@@ -4,11 +4,11 @@
 #include "Book.h"
 #include "User.h"
 #include "Member.h"
+#include "Worker.h"
 
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <memory>
 
 class Library {
 private:
@@ -28,8 +28,9 @@ public:
   void removeBook(std::string title, std::string author);
   
   std::vector<User*> getUsers();
-  void addUser(std::string username, std::string password);
   void removeUser(int id);
+  void addMember(std::string username, std::string password);
+  void addWorker(std::string username, std::string password);
 };
 
 #endif

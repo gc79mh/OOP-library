@@ -15,3 +15,7 @@ void Member::returnBook(Book book) {
     }
   }
 }
+
+std::string Member::getType() const {
+  return "Member";
+}

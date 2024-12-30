@@ -36,7 +36,7 @@ TEST(LibraryTest, removeBook) {
 
 TEST(LibraryTest, addUser) {
   Library lib;
-  lib.addUser("User", "passwd");
+  lib.addMember("User", "passwd");
 
   auto es = lib.getUsers()[0];
   EXPECT_EQ(es->getUsername(), "User");
@@ -44,7 +44,7 @@ TEST(LibraryTest, addUser) {
 
 TEST(LibraryTest, removeUser) {
   Library lib;
-  lib.addUser("user", "passwd");
+  lib.addMember("user", "passwd");
   lib.removeUser(0);
 
   EXPECT_EQ(lib.getUsers().size(), 0);

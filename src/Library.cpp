@@ -75,11 +75,6 @@ void Library::removeBook(std::string title, std::string author) {
 
 std::vector<User *> Library::getUsers() { return this->users; }
 
-void Library::addUser(std::string username, std::string password) {
-  users.push_back(new Member(lastId, username, password));
-  lastId++;
-}
-
 void Library::removeUser(int id) {
   auto it = std::find_if(users.begin(), users.end(),
                          [id](User *user) { return user->getId() == id; });
@@ -88,4 +83,14 @@ void Library::removeUser(int id) {
     delete *it;
     users.erase(it);
   }
+}
+
+void Library::addMember(std::string username, std::string password) {
+  users.push_back(new Member(lastId, username, password));
+  lastId++;
+}
+
+void Library::addWorker(std::string username, std::string password) {
+  users.push_back(new Worker(lastId, username, password));
+  lastId++;
 }

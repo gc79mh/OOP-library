@@ -16,6 +16,8 @@ public:
   std::vector<Book> checkBooks() const;
   void borrowBook(Book book);
   void returnBook(Book book);
+
+  std::string getType() const override;
 };
 
 #endif

@@ -15,7 +15,7 @@ void DebugPrinter::Print(User* user) {
 }
 
 void DebugPrinter::Print(Library& library) {
-  
+  std::cout << std::endl; 
   std::cout << "USERS:" << std::endl;
   auto users = library.getUsers();
   for (auto user : users) {
@@ -25,7 +25,8 @@ void DebugPrinter::Print(Library& library) {
   std::cout << std::endl;
   std::cout << "BOOKS:" << std::endl;
   auto books = library.getBooks();
-  for (auto book : books) {
-    Print(*book);
+  for (auto pair : books) {
+    Print(*(pair.first));
+    std::cout << "Count: " << pair.second << std::endl;
   }
 }

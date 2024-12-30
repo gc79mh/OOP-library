@@ -8,38 +8,69 @@ Library::~Library() {
   }
   users.clear();
 
-  for (auto &book : books) {
-    delete book;
+  for (auto &pair: books) {
+    delete pair.first;
   }
   books.clear();
 }
 
-std::vector<Book *> Library::getBooks() { return books; }
+std::vector<std::pair<Book*, int>> Library::getBooks() { return books; }
 
-void Library::addBook(std::string title, std::string author) {
-  Book *book = new Book(title, author);
+void Library::addBook(Book book) {
+  Book *newBook = new Book(book.getTitle(), book.getAuthor());
   
-  for (int i = 0 ; i < books.size() ; i++) {
-    if (*books[i] == *book) {
-      booksCount[i]++;
+  for (int i = 0 ; i < (int)books.size() ; i++) {
+    if (*(books[i].first) == *newBook) {
+      books[i].second++;
+      delete newBook;
       return;
     }
   }
 
-  books.push_back(book);
-  booksCount.push_back(1);
+  books.push_back({newBook, 1});
 }
-
-void Library::removeBook(std::string title, std::string author) {
+void Library::addBook(std::string title, std::string author) {
   Book *book = new Book(title, author);
-
-  for (int i = 0 ; i < books.size() ; i++ ) {
-    if (*books[i] == *book) {
-      books.erase(books.begin() + i);
-      booksCount.erase(booksCount.begin() + i);
+  
+  for (int i = 0 ; i < (int)books.size() ; i++) {
+    if (*(books[i].first) == *book) {
+      books[i].second++;
+      delete book;
+      return;
     }
   }
 
+  books.push_back({book, 1});
+}
+
+void Library::removeBook(Book book) {
+
+  for (int i = 0 ; i < (int)books.size() ; i++ ) {
+    if (*(books[i].first) == book) {
+      if (books[i].second > 1) {
+        books[i].second--;
+      } else {
+        delete books[i].first;
+        books.erase(books.begin() + i);
+      }
+    }
+  }
+}
+void Library::removeBook(std::string title, std::string author) {
+  Book *book = new Book(title, author);
+
+  for (int i = 0 ; i < (int)books.size() ; i++ ) {
+    if (*(books[i].first) == *book) {
+      if (books[i].second > 1) {
+        books[i].second--;
+      } else {
+        delete books[i].first;
+        books.erase(books.begin() + i);
+      }
+    }
+  }
+
+  delete book;
 }
 
 std::vector<User *> Library::getUsers() { return this->users; }

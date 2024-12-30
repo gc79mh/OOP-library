@@ -14,15 +14,16 @@ class Library {
 private:
   int lastId = 0;
 
-  std::vector<Book*> books;
-  std::vector<int> booksCount;
+  std::vector<std::pair<Book*, int>> books;
   std::vector<User*> users;
 
 public:
   Library();
   ~Library();
-
-  std::vector<Book*> getBooks();
+  
+  std::vector<std::pair<Book*, int>> getBooks();
+  void addBook(Book book);
+  void removeBook(Book book);
   void addBook(std::string title, std::string author);
   void removeBook(std::string title, std::string author);
   

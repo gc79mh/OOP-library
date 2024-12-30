@@ -8,7 +8,7 @@
 class Library {
 private:
   std::vector<Book> books;
-  std::vector<User*> users; 
+  std::vector<User*> users;
 
 public:
   Library();
@@ -18,12 +18,11 @@ public:
   void addBook(std::string title, std::string author);
   void removeBook(Book book);
   void removeBook(std::string title, std::string author);
-  
-  void displayAllUsers() const;
+
+  std::vector<User*> getUsers();
   void addUser(User* user);
   void removeUser(int id);
-  User* findUserById(int id) const;
-
+  User *findUserById(int id) const;
 };
 
-#endif 
+#endif

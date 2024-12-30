@@ -1,27 +1,47 @@
 cmake_minimum_required(VERSION 3.10)
 project(Library)
 
-# C++ standard
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Add Google Test
+
+# Enable Debugging
+set(CMAKE_BUILD_TYPE Debug)
+
+# Add debugging and sanitizer flags
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fsanitize=address")
+
+
+
+
+# Find Google Test
 find_package(GTest REQUIRED)
 if(NOT GTest_FOUND)
   message(FATAL_ERROR "Google Test not found!")
 endif()
 
-# Add your source files
+# Enable warnings for GCC/Clang
+if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  add_compile_options(-Wall -Wextra -Werror -Wnon-virtual-dtor)
+endif()
+
+# Enable warnings for MSVC
+if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  add_compile_options(/W4 /WX)
+endif()
+
+# Source files
 set(SOURCES
   ./src/DebugPrinter.cpp
-
   ./src/Book.cpp
   ./src/User.cpp
   ./src/Member.cpp
   ./src/Library.cpp
 )
 
+# Test files
 set(TESTS
   ./tests/BookTest.cpp
   ./tests/MemberTest.cpp
@@ -36,7 +56,3 @@ add_executable(essa_tests ${TESTS} ${SOURCES})
 
 # Link Google Test for the tests
 target_link_libraries(essa_tests GTest::GTest GTest::Main pthread)
-
-# Enable testing with CTest
-enable_testing()
-add_test(NAME BookTests COMMAND tests)

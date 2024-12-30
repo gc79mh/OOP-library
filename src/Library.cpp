@@ -5,14 +5,16 @@ Library::Library() {}
 Library::~Library() {
   for (auto &user : users) {
     delete user;
+    user = nullptr;
   }
 
   for (auto &book : books) {
     delete book;
+    book = nullptr;
   }
 }
 
-std::vector<Book*> Library::getBooks() { return books; }
+std::vector<Book *> Library::getBooks() { return books; }
 
 void Library::addBook(std::string title, std::string author) {
   books.push_back(new Book(title, author));
@@ -26,6 +28,7 @@ bool Library::removeBook(std::string title, std::string author) {
 
   if (it != books.end()) {
     delete *it;
+    *it = nullptr;
     books.erase(it);
     return true;
   }
@@ -33,7 +36,7 @@ bool Library::removeBook(std::string title, std::string author) {
   return false;
 }
 
-std::vector<User*> Library::getUsers() { return this->users; }
+std::vector<User *> Library::getUsers() { return this->users; }
 
 void Library::addUser(std::string username, std::string password) {
   users.push_back(new Member(lastId, username, password));
@@ -46,6 +49,7 @@ bool Library::removeUser(int id) {
 
   if (it != users.end()) {
     delete *it;
+    *it = nullptr;
     users.erase(it);
     return true;
   }

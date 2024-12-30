@@ -16,7 +16,6 @@ public:
   std::string getTitle() const;
   std::string getAuthor() const;
 
-  friend std::ostream &operator<<(std::ostream &os, const Book &obj);
   friend bool operator==(const Book& lhs, const Book& rhs);
 };
 

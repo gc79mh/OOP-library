@@ -16,6 +16,7 @@ endif()
 set(SOURCES
   ./src/Book.cpp
   ./src/Member.cpp
+  ./src/User.cpp
 )
 
 set(TESTS

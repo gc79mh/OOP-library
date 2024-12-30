@@ -2,19 +2,19 @@
 #include <gtest/gtest.h>
 
 TEST (MemberTest, Constructor) { 
-  Member member1(2137, "Jan", "Kowalski"); 
-  EXPECT_EQ(member1.getMemberId(), 2137);
-  EXPECT_EQ(member1.getName(), "Jan");
-  EXPECT_EQ(member1.getSurname(), "Kowalski");
+  Member member1(2137, "Wiktor", "123"); 
+  EXPECT_EQ(member1.getId(), 2137);
+  EXPECT_EQ(member1.getUsername(), "Wiktor");
+  EXPECT_EQ(member1.getPassword(), "123");
 
-  Member member2(2138, "Adam", "Kowalski"); 
-  EXPECT_EQ(member1.getMemberId(), 2138);
-  EXPECT_EQ(member1.getName(), "Adam");
-  EXPECT_EQ(member1.getSurname(), "Kowalski");
+  Member member2(2138, "Es", "1"); 
+  EXPECT_EQ(member2.getId(), 2138);
+  EXPECT_EQ(member2.getUsername(), "Es");
+  EXPECT_EQ(member2.getPassword(), "1");
 }
 
 TEST (MemberTest, BorrowBook) {
-  Member member(2137, "Jan", "Kowalski"); 
+  Member member(2137, "Es", "1"); 
   Book book1("1984", "Orwell");
   Book book2("The Hobbit", "Tolkien");
 
@@ -31,7 +31,7 @@ TEST (MemberTest, BorrowBook) {
 }
 
 TEST (MemberTest, ReturnBook) {
-  Member member(2137, "Jan", "Kowalski"); 
+  Member member(2137, "Es", "1"); 
   Book book1("1984", "Orwell");
   Book book2("The Hobbit", "Tolkien");
 
@@ -49,8 +49,9 @@ TEST (MemberTest, ReturnBook) {
 }
 
 TEST (MemberTest, Comparison) {
-  Member member1(2137, "Jan", "Kowalski"); 
-  Member member2(2138, "Adam", "Kowalski"); 
+  Member member1(2137, "Es", "1"); 
+  Member member2(2138, "Essa", "2"); 
 
   EXPECT_EQ(member1 == member2, false);
+  EXPECT_EQ(member1 == member1, true);
 }

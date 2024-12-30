@@ -18,10 +18,3 @@ std::string Book::getAuthor() const {
 bool operator==(const Book& lhs, const Book& rhs) {
   return (lhs.getAuthor() == rhs.getAuthor() && lhs.getTitle() == rhs.getTitle());
 }
-
-std::ostream &operator<<(std::ostream &os, const Book &obj) {
-  os << "Title: " + obj.getTitle();
-  os << std::endl;
-  os << "Author: " + obj.getAuthor();
-  return os;
-};

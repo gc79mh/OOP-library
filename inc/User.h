@@ -2,18 +2,24 @@
 #define USER_H
 
 #include <string>
+
 class User {
 private:
-  std::string name;
-  std::string surname;
-  std::string login;
+  int id;
+  std::string username;
   std::string password;
 
-public:
-  User();
-  ~User();
+protected:
+  User(int id, std::string username, std::string password);
 
-  
+public:
+  virtual ~User() = 0;
+
+  int getId() const;
+  std::string getUsername() const;
+  std::string getPassword() const;
+
+  bool operator==(const User &other) const;
 };
 
-#endif 
+#endif

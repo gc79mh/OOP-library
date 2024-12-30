@@ -4,15 +4,13 @@
 #include <string>
 
 class User {
-private:
+protected:
   int id;
   std::string username;
   std::string password;
 
-protected:
-  User(int id, std::string username, std::string password);
-
 public:
+  User(int id, std::string username, std::string password);
   virtual ~User() = 0;
 
   int getId() const;

@@ -12,6 +12,7 @@ private:
 
 public:
   Member(int id, std::string username, std::string password);
+  ~Member();
 
   std::vector<Book> checkBooks() const;
   void borrowBook(Book book);

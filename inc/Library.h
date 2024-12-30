@@ -23,8 +23,10 @@ public:
   
   std::vector<std::pair<Book*, int>> getBooks();
   void addBook(Book book);
-  void removeBook(Book book);
+  void addBook(Book *book);
   void addBook(std::string title, std::string author);
+  void removeBook(Book book);
+  void removeBook(Book *book);
   void removeBook(std::string title, std::string author);
   
   std::vector<User*> getUsers();

@@ -4,7 +4,7 @@ DebugPrinter::DebugPrinter() {}
 
 DebugPrinter::~DebugPrinter() {}
 
-void DebugPrinter::Print(Book book) {
+void DebugPrinter::Print(Book& book) {
   std::cout << "Title: " + book.getTitle() << std::endl;
   std::cout << "Author: " + book.getAuthor() << std::endl;
 }
@@ -14,7 +14,7 @@ void DebugPrinter::Print(User* user) {
   std::cout << "Username: " << user->getUsername() << std::endl;
 }
 
-void DebugPrinter::Print(Library library) {
+void DebugPrinter::Print(Library& library) {
   
   std::cout << "USERS:" << std::endl;
   auto users = library.getUsers();

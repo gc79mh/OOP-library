@@ -14,10 +14,10 @@ public:
   DebugPrinter();
   ~DebugPrinter();
 
-  void Print(Book book);
+  void Print(Book& book);
   void Print(User* user);
-  void Print(Member member);
-  void Print(Library library);
+  void Print(Member& member);
+  void Print(Library& library);
 
 };
 

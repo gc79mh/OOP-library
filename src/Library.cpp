@@ -5,13 +5,13 @@ Library::Library() {}
 Library::~Library() {
   for (auto &user : users) {
     delete user;
-    user = nullptr;
   }
+  users.clear();
 
   for (auto &book : books) {
     delete book;
-    book = nullptr;
   }
+  books.clear();
 }
 
 std::vector<Book *> Library::getBooks() { return books; }
@@ -28,7 +28,6 @@ bool Library::removeBook(std::string title, std::string author) {
 
   if (it != books.end()) {
     delete *it;
-    *it = nullptr;
     books.erase(it);
     return true;
   }
@@ -49,7 +48,6 @@ bool Library::removeUser(int id) {
 
   if (it != users.end()) {
     delete *it;
-    *it = nullptr;
     users.erase(it);
     return true;
   }

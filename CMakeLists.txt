@@ -14,6 +14,7 @@ endif()
 
 # Add your source files
 set(SOURCES
+  ./src/DebugPrinter.cpp
   ./src/Book.cpp
   ./src/Member.cpp
   ./src/User.cpp

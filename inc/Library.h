@@ -2,15 +2,13 @@
 #define LIBRARY_H
 
 #include "Book.h"
-#include "Member.h"
-#include <iostream>
-#include <string>
+#include "User.h"
 #include <vector>
 
 class Library {
 private:
   std::vector<Book> books;
-  std::vector<Member> members;
+  std::vector<User*> users; 
 
 public:
   Library();
@@ -21,11 +19,11 @@ public:
   void removeBook(Book book);
   void removeBook(std::string title, std::string author);
   
-  std::vector<Member> showMembers();
-  void registerNewMember(std::string name, std::string surname);
-  void removeMember(int memberId);
+  void displayAllUsers() const;
+  void addUser(User* user);
+  void removeUser(int id);
+  User* findUserById(int id) const;
 
-  friend std::ostream &operator<<(std::ostream &os, const Library &obj);
 };
 
 #endif 

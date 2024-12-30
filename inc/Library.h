@@ -15,6 +15,7 @@ private:
   int lastId = 0;
 
   std::vector<Book*> books;
+  std::vector<int> booksCount;
   std::vector<User*> users;
 
 public:

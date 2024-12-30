@@ -17,19 +17,29 @@ Library::~Library() {
 std::vector<Book *> Library::getBooks() { return books; }
 
 void Library::addBook(std::string title, std::string author) {
-  books.push_back(new Book(title, author));
+  Book *book = new Book(title, author);
+  
+  for (int i = 0 ; i < books.size() ; i++) {
+    if (*books[i] == *book) {
+      booksCount[i]++;
+      return;
+    }
+  }
+
+  books.push_back(book);
+  booksCount.push_back(1);
 }
 
 void Library::removeBook(std::string title, std::string author) {
-  auto it =
-      std::find_if(books.begin(), books.end(), [title, author](Book *book) {
-        return (book->getTitle() == title && book->getAuthor() == author);
-      });
+  Book *book = new Book(title, author);
 
-  if (it != books.end()) {
-    delete *it;
-    books.erase(it);
+  for (int i = 0 ; i < books.size() ; i++ ) {
+    if (*books[i] == *book) {
+      books.erase(books.begin() + i);
+      booksCount.erase(booksCount.begin() + i);
+    }
   }
+
 }
 
 std::vector<User *> Library::getUsers() { return this->users; }

@@ -2,26 +2,23 @@
 #define DEBUGPRINTER_H
 
 #include "Book.h"
+#include "User.h"
 #include "Member.h"
+#include "Library.h"
 
 #include <string>
 #include <iostream>
 
 class DebugPrinter {
-private:
-  std::string title;
-  std::string author;
-
 public:
   DebugPrinter();
   ~DebugPrinter();
 
   void Print(Book book);
-  void Print(Member user);
+  void Print(User* user);
+  void Print(Member member);
+  void Print(Library library);
 
 };
-
-std::ostream &operator<<(std::ostream &os, const Member &obj);
-std::ostream &operator<<(std::ostream &os, const Book &obj);
 
 #endif

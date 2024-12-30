@@ -15,14 +15,17 @@ endif()
 # Add your source files
 set(SOURCES
   ./src/DebugPrinter.cpp
+
   ./src/Book.cpp
-  ./src/Member.cpp
   ./src/User.cpp
+  ./src/Member.cpp
+  ./src/Library.cpp
 )
 
 set(TESTS
   ./tests/BookTest.cpp
   ./tests/MemberTest.cpp
+  ./tests/LibraryTest.cpp
 )
 
 # Main application executable

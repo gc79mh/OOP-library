@@ -3,26 +3,30 @@
 
 #include "Book.h"
 #include "User.h"
+#include "Member.h"
+
+#include <string>
 #include <vector>
+#include <algorithm>
 
 class Library {
 private:
-  std::vector<Book> books;
+  int lastId = 0;
+
+  std::vector<Book*> books;
   std::vector<User*> users;
 
 public:
   Library();
   ~Library();
 
-  void addBook(Book book);
+  std::vector<Book*> getBooks();
   void addBook(std::string title, std::string author);
-  void removeBook(Book book);
-  void removeBook(std::string title, std::string author);
-
+  bool removeBook(std::string title, std::string author);
+  
   std::vector<User*> getUsers();
-  void addUser(User* user);
-  void removeUser(int id);
-  User *findUserById(int id) const;
+  void addUser(std::string username, std::string password);
+  bool removeUser(int id);
 };
 
 #endif

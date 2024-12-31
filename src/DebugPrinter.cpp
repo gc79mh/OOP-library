@@ -16,15 +16,15 @@ void DebugPrinter::Print(User* user) {
 }
 
 
-void DebugPrinter::Print(PrivilegeLevel pl) {
-  switch (pl) {
-    case PrivilegeLevel::BOSS:
+void DebugPrinter::Print(UserType type) {
+  switch (type) {
+    case UserType::BOSS:
       std::cout << "Boss";
       break;
-    case PrivilegeLevel::WORKER:
+    case UserType::WORKER:
       std::cout << "Worker";
       break;
-    case PrivilegeLevel::USER:
+    case UserType::USER:
       std::cout << "User";
       break;
   }

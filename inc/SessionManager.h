@@ -4,6 +4,8 @@
 #include "User.h"
 #include "Library.h"
 
+#include <iostream>
+
 class SessionManager {
 private:
   Library *library;

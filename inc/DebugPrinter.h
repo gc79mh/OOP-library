@@ -6,7 +6,7 @@
 #include "Member.h"
 #include "Library.h"
 #include "Boss.h"
-#include "PrivilegeLevel.h"
+#include "UserType.h"
 
 #include <string>
 #include <iostream>
@@ -20,7 +20,7 @@ public:
   void Print(User* user);
   void Print(Member& member);
   void Print(Library& library);
-  void Print(PrivilegeLevel pl); 
+  void Print(UserType pl); 
 
 };
 

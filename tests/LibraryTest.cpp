@@ -38,14 +38,14 @@ TEST(LibraryTest, addUser) {
   Library lib;
   lib.addMember("User", "passwd");
 
-  auto es = lib.getUsers()[0];
+  auto es = lib.getUsers()[1];
   EXPECT_EQ(es->getUsername(), "User");
 }
 
 TEST(LibraryTest, removeUser) {
   Library lib;
   lib.addMember("user", "passwd");
-  lib.removeUser(0);
+  lib.removeUser(1);
 
-  EXPECT_EQ(lib.getUsers().size(), 0);
+  EXPECT_EQ(lib.getUsers().size(), 1);
 }

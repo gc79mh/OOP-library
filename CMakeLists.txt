@@ -40,6 +40,7 @@ set(SOURCES
   ./src/Member.cpp
   ./src/Library.cpp
   ./src/Worker.cpp
+  ./src/Boss.cpp
 )
 
 # Test files

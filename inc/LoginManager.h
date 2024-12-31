@@ -15,7 +15,7 @@ public:
   ~LoginManager ();
   
 
-  bool checkData(std::string username, std::string password); 
+  bool checkUser(std::string username, std::string password); 
   User* findUser(std::string username, std::string password); 
   User* loginScreen();
 };

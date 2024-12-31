@@ -49,6 +49,7 @@ set(TESTS
   ./tests/BookTest.cpp
   ./tests/MemberTest.cpp
   ./tests/LibraryTest.cpp
+  ./tests/LoginTest.cpp
 )
 
 # Main application executable

@@ -3,7 +3,7 @@
 LoginManager::LoginManager(Library &library) { this->library = &library; }
 LoginManager::~LoginManager() {}
 
-bool LoginManager::checkData(std::string username, std::string password) {
+bool LoginManager::checkUser(std::string username, std::string password) {
   auto users = library->getUsers();
   for (auto user : users) {
     if (user->getUsername() == username && user->getPassword() == password) {
@@ -32,7 +32,7 @@ User* LoginManager::loginScreen() {
     std::cin >> username;
     std::cout << "Password: ";
     std::cin >> password;
-  } while (!checkData(username, password));
+  } while (!checkUser(username, password));
 
   return findUser(username, password);
 }

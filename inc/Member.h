@@ -1,27 +1,24 @@
 #ifndef MEMBER_H
 #define MEMBER_H
 
-#include <iostream>
-#include <vector>
-#include "../inc/Book.h"
+#include "Book.h"
+#include "User.h"
 
-class Member {
+#include <vector>
+
+class Member : public User {
 private:
-  int memberId;
   std::vector<Book> borrowedBooks;
 
 public:
-  Member(int memberId);
+  Member(int id, std::string username, std::string password);
   ~Member();
 
-  std::vector<Book> checkBooks();
+  std::vector<Book> checkBooks() const;
   void borrowBook(Book book);
   void returnBook(Book book);
-  
-  int getMemberId() const;
 
-  friend bool operator==(const Member& lhs, const Member& rhs);
-  friend std::ostream &operator<<(std::ostream &os, const Member &obj);
+  UserType getType() const override;
 };
 
 #endif

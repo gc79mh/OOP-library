@@ -1,13 +1,26 @@
 #ifndef USER_H
 #define USER_H
 
-class User {
-public:
-  User();
-  ~User();
+#include "UserType.h"
 
-private:
-  
+#include <string>
+
+class User {
+protected:
+  int id;
+  std::string username;
+  std::string password;
+
+public:
+  User(int id, std::string username, std::string password);
+  virtual ~User() = 0;
+
+  int getId() const;
+  std::string getUsername() const;
+  std::string getPassword() const;
+  virtual UserType getType() const = 0;
+
+  bool operator==(const User &other) const;
 };
 
-#endif 
+#endif

@@ -1,37 +1,27 @@
 #include "../inc/Member.h"
 
-Member::Member(int memberId) {
-  this->memberId = memberId;
-}
+Member::Member(int id, std::string username, std::string password)
+    : User(id, username, password) {}
+
 Member::~Member() {}
 
-std::vector<Book> Member::checkBooks() {
-  return this->borrowedBooks;
+std::vector<Book> Member::checkBooks() const { 
+  return borrowedBooks;
 }
 
-void Member::borrowBook(Book book) {
-  this->borrowedBooks.push_back(book);
+void Member::borrowBook(Book book) { 
+  borrowedBooks.push_back(book);
 }
 
 void Member::returnBook(Book book) {
-  for (int i = 0 ; i < this->borrowedBooks.size() ; i++) {
-    if (this->borrowedBooks[i] == book) {
-      this->borrowedBooks.erase(this->borrowedBooks.begin() + i);
+  for (int i = 0; i < (int) borrowedBooks.size(); i++) {
+    if (borrowedBooks[i] == book) {
+      borrowedBooks.erase(borrowedBooks.begin() + i);
       break;
     }
   }
 }
 
-int Member::getMemberId() const {
-  return this->memberId;
-}
-
-bool operator==(const Member &lhs, const Member &rhs) {
-  return lhs.getMemberId() == rhs.getMemberId();
-}
-
-std::ostream &operator<<(std::ostream &os, const Member &obj) {
-  os << "Member Id: ";
-  os << obj.getMemberId();
-  return os;
+UserType Member::getType() const {
+  return UserType::USER;
 }

@@ -2,26 +2,38 @@
 #define LIBRARY_H
 
 #include "Book.h"
+#include "User.h"
 #include "Member.h"
-#include <iostream>
+#include "Worker.h"
+#include "Boss.h"
+
+#include <string>
 #include <vector>
+#include <algorithm>
 
 class Library {
 private:
-  std::vector<Book> books;
-  std::vector<Member> members;
+  int lastId;
+
+  std::vector<std::pair<Book*, int>> books;
+  std::vector<User*> users;
 
 public:
   Library();
   ~Library();
-
+  
+  std::vector<std::pair<Book*, int>> getBooks();
   void addBook(Book book);
+  void addBook(Book *book);
+  void addBook(std::string title, std::string author);
   void removeBook(Book book);
-
-  void registerMember(Member member);
-  void removeMember(Member member);
-
-  friend std::ostream &operator<<(std::ostream &os, const Library &obj);
+  void removeBook(Book *book);
+  void removeBook(std::string title, std::string author);
+  
+  std::vector<User*> getUsers();
+  void removeUser(int id);
+  void addMember(std::string username, std::string password);
+  void addWorker(std::string username, std::string password);
 };
 
-#endif 
+#endif

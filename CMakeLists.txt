@@ -43,6 +43,7 @@ set(SOURCES
   ./src/Boss.cpp
   ./src/LoginManager.cpp
   ./src/SessionManager.cpp
+  ./src/Utils.cpp
 )
 
 # Test files

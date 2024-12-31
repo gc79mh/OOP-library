@@ -24,10 +24,12 @@ User* LoginManager::findUser(std::string username, std::string password) {
 }
 
 User* LoginManager::loginScreen() {
+  Utils u;
+
   std::string username;
   std::string password;
   do {
-    /*std::cout << "\033[2J\033[1;1H";*/
+    u.ClearScreen();
     std::cout << "Login: ";
     std::cin >> username;
     std::cout << "Password: ";

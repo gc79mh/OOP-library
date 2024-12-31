@@ -25,6 +25,8 @@ std::string Utils::Color(std::string color) {
     return "\e[1;90m";
   } else if (color == "Green") {
     return "\e[1;32m";
+  } else if (color == "Pink") {
+    return "\e[36m";
   }
   return "";
 }

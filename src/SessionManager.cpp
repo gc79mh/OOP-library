@@ -1,4 +1,5 @@
 #include "../inc/SessionManager.h"
+#include <cstdio>
 
 SessionManager::SessionManager(Library &library) { this->library = &library; }
 
@@ -13,6 +14,7 @@ bool SessionManager::startSession(User *user) {
 
   Member *member;
   Worker *worker;
+  Boss *boss;
 
   switch (type) {
   case UserType::USER:
@@ -26,7 +28,8 @@ bool SessionManager::startSession(User *user) {
     return sessionContinue;
     break;
   case UserType::BOSS:
-    sessionContinue = bossSession(user);
+    boss = dynamic_cast<Boss *>(user);
+    sessionContinue = bossSession(boss);
     return sessionContinue;
     break;
   }
@@ -106,7 +109,8 @@ void SessionManager::displayUsers() {
   auto users = library->getUsers();
   for (auto user : users) {
     if (user->getType() == UserType::USER) {
-      std::cout << " ID: " << u.Color("Blue")<< user->getId() << u.Color("Base") << " - Username: ";
+      std::cout << " ID: " << u.Color("Blue") << user->getId()
+                << u.Color("Base") << " - Username: ";
       std::cout << u.Color("Blue") << user->getUsername() << u.Color("Base");
       std::cout << std::endl;
     }
@@ -202,19 +206,23 @@ bool SessionManager::workerSession(Worker *worker) {
       u.Wait();
       break;
     case '2':
+      addBook();
       break;
     case '3':
+      removeBook();
       break;
     case '4':
       u.ClearScreen();
-      std::cout << u.Color("Green")
-                << "Registered users: " << u.Color("Base") << std::endl;
+      std::cout << u.Color("Green") << "Registered users: " << u.Color("Base")
+                << std::endl;
       displayUsers();
       u.Wait();
       break;
     case '5':
+      addMember();
       break;
     case '6':
+      removeMember();
       break;
     case '7':
       return true;
@@ -229,7 +237,166 @@ bool SessionManager::workerSession(Worker *worker) {
   return false;
 }
 
-bool SessionManager::bossSession(User *user) {
-  std::cout << "boss " << user->getUsername() << std::endl;
-  return 0;
+void SessionManager::addBook() {
+  u.ClearScreen();
+  
+  std::string title;
+  std::string author;
+  int count;
+
+  std::cout << u.Color("Green") << "Add a book: " << u.Color("Base") << std::endl;
+  std::cout << "Title: ";
+  std::cin.ignore();
+  getline(std::cin, title);
+  std::cout << "Author: ";
+  std::cin.ignore();
+  getline(std::cin, author);
+  std::cout << "Count: ";
+  std::cin >> count;
+
+  for (int i = 0 ; i < count ; i++) {
+    library->addBook(title, author);
+  }
+
+}
+void SessionManager::removeBook() {
+  u.ClearScreen();
+  
+  int count, option;
+
+  std::cout << u.Color("Green") << "Remove a book: " << u.Color("Base") << std::endl;
+  
+  displayBooks();
+  
+  std::cout << ": ";
+  std::cin >> option;
+  std::cout << "Count: ";
+  std::cin >> count;
+  
+  auto books = library->getBooks();
+  if (count > books[option - 1].second) count = books[option - 1].second;
+  for (int i = 0 ; i < count ; i++) {
+    library->removeBook(books[option-1].first->getTitle(),books[option-1].first->getAuthor());
+  }
+
+}
+void SessionManager::addMember() {
+  u.ClearScreen();
+  
+  std::string username;
+  std::string password;
+
+  std::cout << u.Color("Green") << "Add member: " << u.Color("Base") << std::endl;
+  std::cout << "username: ";
+  std::cin >> username;
+  std::cout << "password: ";
+  std::cin >> password;
+
+  library->addMember(username, password);
+
+}
+void SessionManager::removeMember() {
+  u.ClearScreen();
+  
+  int id;
+
+  std::cout << u.Color("Green") << "Remove member: " << u.Color("Base") << std::endl;
+  
+  displayUsers();
+  
+  std::cout << "ID: ";
+  std::cin >> id;
+  
+  library->removeUser(id);
+
+}
+
+bool SessionManager::bossSession(Boss *boss) {
+  while (1) {
+    u.ClearScreen();
+    std::string es = boss->getUsername();
+
+    std::cout << u.Color("Pink") << "Choose an option:   " << u.Color("Base")
+              << std::endl;
+    std::cout << u.Color("Red") << "1. " << u.Color("Base") << "See Employees"
+              << std::endl;
+    std::cout << u.Color("Red") << "2. " << u.Color("Base") << "Add Librarian"
+              << std::endl;
+    std::cout << u.Color("Red") << "3. " << u.Color("Base") << "Remove Librarian   "
+              << std::endl;
+    std::cout << u.Color("Red") << "4. " << u.Color("Base") << "Log out        "
+              << std::endl;
+    std::cout << u.Color("Red") << "5. " << u.Color("Base") << "Exit           "
+              << std::endl;
+
+    char option;
+    std::cout << ": ";
+    std::cin >> option;
+
+    switch (option) {
+    case '1':
+      u.ClearScreen();
+      std::cout << u.Color("Pink")
+                << "Employees: " << u.Color("Base") << std::endl;
+      displayWorkers();
+      u.Wait();
+      break;
+    case '2':
+      addWorker();
+      break;
+    case '3':
+      removeWorker();
+      break;
+    case '4':
+      return true;
+      break;
+    case '5':
+      return false;
+      break;
+    }
+  }
+  std::cin.ignore(100000, '\n');
+
+  return false;
+}
+void SessionManager::displayWorkers() {
+  auto users = library->getUsers();
+  for (auto user : users) {
+    if (user->getType() == UserType::WORKER) {
+      std::cout << " ID: " << u.Color("Blue") << user->getId()
+                << u.Color("Base") << " - Username: ";
+      std::cout << u.Color("Blue") << user->getUsername() << u.Color("Base");
+      std::cout << std::endl;
+    }
+  }
+}
+void SessionManager::addWorker() {
+  u.ClearScreen();
+  
+  std::string username;
+  std::string password;
+
+  std::cout << u.Color("Pink") << "Add member: " << u.Color("Base") << std::endl;
+  std::cout << "username: ";
+  std::cin >> username;
+  std::cout << "password: ";
+  std::cin >> password;
+
+  library->addWorker(username, password);
+
+}
+void SessionManager::removeWorker() {
+  u.ClearScreen();
+  
+  int id;
+
+  std::cout << u.Color("Pink") << "Remove member: " << u.Color("Base") << std::endl;
+ 
+  displayWorkers();
+  
+  std::cout << "ID: ";
+  std::cin >> id;
+  
+  library->removeUser(id);
+
 }

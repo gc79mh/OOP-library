@@ -26,7 +26,17 @@ public:
   void memberReturn(Member* user);
 
   bool workerSession(Worker* worker);
-  bool bossSession(User* user);
+
+  void addMember();
+  void removeMember();
+  void addBook();
+  void removeBook();
+
+  bool bossSession(Boss* boss);
+  
+  void displayWorkers();
+  void addWorker();
+  void removeWorker();
 
 };
 

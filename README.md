@@ -1,3 +1,3 @@
-giga essa
-#2
-#3
+Login credentials for the main user:
+root
+root

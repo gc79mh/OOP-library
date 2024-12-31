@@ -18,7 +18,7 @@ public:
   void borrowBook(Book book);
   void returnBook(Book book);
 
-   PrivilegeLevel getType() const override;
+  UserType getType() const override;
 };
 
 #endif

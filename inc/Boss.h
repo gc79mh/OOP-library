@@ -10,7 +10,7 @@ public:
   Boss(int id, std::string username, std::string password);
   ~Boss();
 
-  PrivilegeLevel getType() const override;
+  UserType getType() const override;
 };
 
 #endif 

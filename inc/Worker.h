@@ -10,7 +10,7 @@ public:
   Worker(int id, std::string username, std::string password);
   ~Worker();
 
-  PrivilegeLevel getType() const override;
+  UserType getType() const override;
 };
 
 #endif 

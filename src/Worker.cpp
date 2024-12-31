@@ -5,6 +5,6 @@ Worker::Worker(int id, std::string username, std::string password)
 
 Worker::~Worker() {}
 
-PrivilegeLevel Worker::getType() const {
-  return PrivilegeLevel::WORKER;
+UserType Worker::getType() const {
+  return UserType::WORKER;
 }

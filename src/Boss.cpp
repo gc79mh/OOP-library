@@ -5,6 +5,6 @@ Boss::Boss(int id, std::string username, std::string password)
 
 Boss::~Boss() {}
 
-PrivilegeLevel Boss::getType() const {
-  return PrivilegeLevel::BOSS;
+UserType Boss::getType() const {
+  return UserType::BOSS;
 }

@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <iostream>
+#include <string>
 
 class Utils {
 private:
@@ -11,6 +12,8 @@ public:
   ~Utils();
 
   void ClearScreen();
+  std::string Color(std::string color);
+
 };
 
 #endif

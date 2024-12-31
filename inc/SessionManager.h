@@ -13,11 +13,11 @@ public:
   SessionManager (Library &library);
   ~SessionManager ();
 
-  void startSession(User* user);
+  bool startSession(User* user);
 
-  void memberSession(User* user);
-  void workerSession(User* user);
-  void bossSession(User* user);
+  bool memberSession(User* user);
+  bool workerSession(User* user);
+  bool bossSession(User* user);
 
 };
 

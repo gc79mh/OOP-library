@@ -13,6 +13,7 @@ public:
 
   void ClearScreen();
   std::string Color(std::string color);
+  void Wait();
 
 };
 

@@ -2,7 +2,6 @@
 #define MEMBER_H
 
 #include "Book.h"
-#include "PrivilegeLevel.h"
 #include "User.h"
 
 #include <vector>

@@ -1,6 +1,9 @@
 #include "../inc/Library.h"
 
-Library::Library() {}
+Library::Library() {
+  lastId = 0;
+  users.push_back(new Boss(lastId++, "root", "root"));
+}
 
 Library::~Library() {
   for (auto &user : users) {

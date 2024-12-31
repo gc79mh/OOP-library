@@ -5,6 +5,7 @@
 #include "User.h"
 #include "Member.h"
 #include "Worker.h"
+#include "Boss.h"
 
 #include <string>
 #include <vector>
@@ -12,7 +13,7 @@
 
 class Library {
 private:
-  int lastId = 0;
+  int lastId;
 
   std::vector<std::pair<Book*, int>> books;
   std::vector<User*> users;

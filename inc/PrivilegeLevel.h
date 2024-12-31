@@ -4,7 +4,7 @@
 enum class PrivilegeLevel {
   USER,
   WORKER,
-  ADMIN      
+  BOSS 
 };
 
 #endif 

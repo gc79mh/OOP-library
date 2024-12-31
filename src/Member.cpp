@@ -22,6 +22,6 @@ void Member::returnBook(Book book) {
   }
 }
 
-std::string Member::getType() const {
-  return "Member";
+PrivilegeLevel Member::getType() const {
+  return PrivilegeLevel::USER;
 }

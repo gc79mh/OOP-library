@@ -1,6 +1,8 @@
 #ifndef USER_H
 #define USER_H
 
+#include "PrivilegeLevel.h"
+
 #include <string>
 
 class User {
@@ -16,7 +18,7 @@ public:
   int getId() const;
   std::string getUsername() const;
   std::string getPassword() const;
-  virtual std::string getType() const = 0;
+  virtual PrivilegeLevel getType() const = 0;
 
   bool operator==(const User &other) const;
 };

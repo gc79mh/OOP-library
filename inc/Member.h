@@ -2,6 +2,7 @@
 #define MEMBER_H
 
 #include "Book.h"
+#include "PrivilegeLevel.h"
 #include "User.h"
 
 #include <vector>
@@ -18,7 +19,7 @@ public:
   void borrowBook(Book book);
   void returnBook(Book book);
 
-  std::string getType() const override;
+   PrivilegeLevel getType() const override;
 };
 
 #endif

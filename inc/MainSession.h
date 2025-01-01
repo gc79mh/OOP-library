@@ -8,7 +8,7 @@
 #include "MemberSession.h"
 #include "LoginManager.h"
 
-class SessionManager {
+class MainSession {
 private:
   Library *library;
   Utils u;
@@ -18,12 +18,12 @@ private:
   MemberSession ms;
 
 public:
-  SessionManager (Library &library);
-  ~SessionManager ();
+  MainSession (Library &library);
+  ~MainSession ();
 
   void startSession(User *user);
   
-  void menu();
+  void start();
 
   int userInput();
   void displayTitle(std::string title);

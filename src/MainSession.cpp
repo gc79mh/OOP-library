@@ -1,14 +1,14 @@
-#include "../inc/SessionManager.h"
+#include "../inc/MainSession.h"
 #include <cstdio>
 
-SessionManager::SessionManager(Library &library) : ms(library) {
+MainSession::MainSession(Library &library) : ms(library) {
   this->library = &library;
   optionNumber = 1;
 }
 
-SessionManager::~SessionManager() {}
+MainSession::~MainSession() {}
 
-void SessionManager::menu() {
+void MainSession::start() {
   LoginManager lm(*library);
 
   while (1) {
@@ -40,12 +40,12 @@ void SessionManager::menu() {
   }
 }
 
-void SessionManager::startSession(User *user) {
+void MainSession::startSession(User *user) {
   UserType type = user->getType();
 
   if (type == UserType::USER) {
     Member *member = dynamic_cast<Member *>(user);
-    ms.menu(member);
+    ms.start(member);
   }
   if (type == UserType::WORKER) {
     Worker *worker = dynamic_cast<Worker *>(user);
@@ -57,7 +57,7 @@ void SessionManager::startSession(User *user) {
   }
 }
 
-void SessionManager::displayTitle(std::string title) {
+void MainSession::displayTitle(std::string title) {
   u.ClearScreen();
   std::cout << u.Color("Red");
   std::cout << title;
@@ -66,7 +66,7 @@ void SessionManager::displayTitle(std::string title) {
   optionNumber = 1;
 }
 
-void SessionManager::displayOption(std::string text) {
+void MainSession::displayOption(std::string text) {
   std::cout << u.Color("Red");
   std::cout << optionNumber++ << ". ";
   std::cout << u.Color("Base");
@@ -74,7 +74,7 @@ void SessionManager::displayOption(std::string text) {
   std::cout << std::endl;
 }
 
-int SessionManager::userInput() {
+int MainSession::userInput() {
   std::cout << ": ";
 
   std::string rawInput;
@@ -100,7 +100,7 @@ int SessionManager::userInput() {
   return pick;
 }
 
-void SessionManager::displayBooks() {
+void MainSession::displayBooks() {
   auto books = library->getBooks();
   for (int i = 0; i < (int)books.size(); i++) {
     auto book = books[i];
@@ -111,7 +111,7 @@ void SessionManager::displayBooks() {
     std::cout << std::endl;
   }
 }
-void SessionManager::displayUsers() {
+void MainSession::displayUsers() {
   auto users = library->getUsers();
   for (auto user : users) {
     if (user->getType() == UserType::USER) {
@@ -123,7 +123,7 @@ void SessionManager::displayUsers() {
   }
 }
 
-bool SessionManager::workerSession(Worker *worker) {
+bool MainSession::workerSession(Worker *worker) {
   while (1) {
     u.ClearScreen();
     std::string s = worker->getUsername();
@@ -191,7 +191,7 @@ bool SessionManager::workerSession(Worker *worker) {
   return false;
 }
 
-void SessionManager::addBook() {
+void MainSession::addBook() {
   u.ClearScreen();
 
   std::string title;
@@ -212,7 +212,7 @@ void SessionManager::addBook() {
     library->addBook(title, author);
   }
 }
-void SessionManager::removeBook() {
+void MainSession::removeBook() {
   u.ClearScreen();
 
   int count, option;
@@ -235,7 +235,7 @@ void SessionManager::removeBook() {
                         books[option - 1].first->getAuthor());
   }
 }
-void SessionManager::addMember() {
+void MainSession::addMember() {
   u.ClearScreen();
 
   std::string username;
@@ -250,7 +250,7 @@ void SessionManager::addMember() {
 
   library->addMember(username, password);
 }
-void SessionManager::removeMember() {
+void MainSession::removeMember() {
   u.ClearScreen();
 
   int id;
@@ -266,7 +266,7 @@ void SessionManager::removeMember() {
   library->removeUser(id);
 }
 
-bool SessionManager::bossSession(Boss *boss) {
+bool MainSession::bossSession(Boss *boss) {
   while (1) {
     u.ClearScreen();
     std::string es = boss->getUsername();
@@ -314,7 +314,7 @@ bool SessionManager::bossSession(Boss *boss) {
 
   return false;
 }
-void SessionManager::displayWorkers() {
+void MainSession::displayWorkers() {
   auto users = library->getUsers();
   for (auto user : users) {
     if (user->getType() == UserType::WORKER) {
@@ -325,7 +325,7 @@ void SessionManager::displayWorkers() {
     }
   }
 }
-void SessionManager::addWorker() {
+void MainSession::addWorker() {
   u.ClearScreen();
 
   std::string username;
@@ -340,7 +340,7 @@ void SessionManager::addWorker() {
 
   library->addWorker(username, password);
 }
-void SessionManager::removeWorker() {
+void MainSession::removeWorker() {
   u.ClearScreen();
 
   int id;

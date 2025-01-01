@@ -10,7 +10,7 @@ public:
   MemberSession (Library &library);
   ~MemberSession ();
   
-  void menu(Member *member);
+  void start(Member *member);
 
   void displayMemberBooks(Member* user);
 

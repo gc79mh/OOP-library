@@ -17,9 +17,9 @@ protected:
 
 public:
   Session (Library &library);
-  virtual ~Session ();
+  ~Session ();
   
-  void menu();
+  void start();
 
   int userInput();
   void displayTitle(std::string title);

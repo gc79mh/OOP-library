@@ -1,16 +1,16 @@
 #include "../inc/Library.h"
-#include "../inc/SessionManager.h"
+#include "../inc/MainSession.h"
 
 int main() {
-  Library lb;
-  SessionManager sm(lb);
+  Library library;
+  MainSession session(library);
 
-  lb.addMember("1", "1");
+  library.addMember("1", "1");
 
-  lb.addBook("Ksiona", "Autor");
-  lb.addBook("Ksiona2", "Autor");
+  library.addBook("Ksiona", "Autor");
+  library.addBook("Ksiona2", "Autor");
 
-  sm.menu();
+  session.start();
 
   return 0;
 }

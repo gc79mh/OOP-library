@@ -3,12 +3,12 @@
 #include <string>
 
 MemberSession::MemberSession(Library &library) : Session(library) {
-  color = "Red";
+  color = "Yellow";
 }
 
 MemberSession::~MemberSession() {}
 
-void MemberSession::menu(Member *member) {
+void MemberSession::start(Member *member) {
   while (1) {
     displayTitle("Choose: ");
     displayOption("Available books");

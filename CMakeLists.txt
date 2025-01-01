@@ -43,6 +43,7 @@ set(SOURCES
   ./src/MemberSession.cpp
   ./src/Session.cpp
   ./src/WorkerSession.cpp
+  ./src/BossSession.cpp
 )
 
 # Test files

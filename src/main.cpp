@@ -15,13 +15,11 @@ int main() {
   lb.addBook("Ksiona2", "Autor");
 
   User *currentUser;
-  bool sessionContinue;
 
-  do {
+  while (true) {
     currentUser = lm.loginScreen();
-    sessionContinue = sm.startSession(currentUser);
-
-  } while (sessionContinue);
+    sm.startSession(currentUser);
+  }
 
   return 0;
 }

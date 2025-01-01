@@ -5,12 +5,10 @@ SessionManager::SessionManager(Library &library) { this->library = &library; }
 
 SessionManager::~SessionManager() {}
 
-bool SessionManager::startSession(User *user) {
+void SessionManager::startSession(User *user) {
   u.ClearScreen();
 
   UserType type = user->getType();
-
-  bool sessionContinue;
 
   Member *member;
   Worker *worker;
@@ -18,24 +16,18 @@ bool SessionManager::startSession(User *user) {
 
   if (type == UserType::USER) {
     member = dynamic_cast<Member *>(user);
-    
     MemberSession ms(*library);
 
-    sessionContinue = ms.memberSession(member);
-    return sessionContinue;
+    ms.memberSession(member);
   }
   if (type == UserType::WORKER) {
     worker = dynamic_cast<Worker *>(user);
-    sessionContinue = workerSession(worker);
-    return sessionContinue;
+    workerSession(worker);
   }
   if (type == UserType::BOSS) {
     boss = dynamic_cast<Boss *>(user);
-    sessionContinue = bossSession(boss);
-    return sessionContinue;
+    bossSession(boss);
   }
-
-  return false;
 }
 
 void SessionManager::displayBooks() {

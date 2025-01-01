@@ -16,7 +16,7 @@ public:
   SessionManager (Library &library);
   ~SessionManager ();
 
-  bool startSession(User* user);
+  void startSession(User* user);
 
   void displayBooks();
   void displayUsers();

@@ -18,15 +18,15 @@ public:
   MemberSession (Library &library);
   ~MemberSession ();
   
-  bool memberSession(Member* user);
+  void memberSession(Member* user);
 
   int userInput();
 
   void displayMenu();
   void displayTitle(std::string title);
-  void displayBooks();
+  void displayLibraryBooks();
+  void displayMemberBooks(Member* user);
 
-  void memberCheckBooks(Member* user);
   void memberRent(Member* user);
   void memberReturn(Member* user);
 

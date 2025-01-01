@@ -14,21 +14,12 @@ void MemberSession::displayTitle(std::string title) {
   std::cout << std::endl;
 }
 void MemberSession::displayMenu() {
-  u.ClearScreen();
-  std::cout << u.Color("Yellow") << "Choose an option:   " << u.Color("Base")
-            << std::endl;
-  std::cout << u.Color("Red") << "1. " << u.Color("Base") << "See all books  "
-            << std::endl;
-  std::cout << u.Color("Red") << "2. " << u.Color("Base") << "See my books   "
-            << std::endl;
-  std::cout << u.Color("Red") << "3. " << u.Color("Base") << "Rent a new book"
-            << std::endl;
-  std::cout << u.Color("Red") << "4. " << u.Color("Base") << "Return a book  "
-            << std::endl;
-  std::cout << u.Color("Red") << "5. " << u.Color("Base") << "Log out        "
-            << std::endl;
-  std::cout << u.Color("Red") << "6. " << u.Color("Base") << "Exit           "
-            << std::endl;
+  displayTitle("Pick an action: ");
+  std::cout << u.Color("Red") << "1. " << u.Color("Base") << "See all books  " << std::endl;
+  std::cout << u.Color("Red") << "2. " << u.Color("Base") << "See my books   " << std::endl;
+  std::cout << u.Color("Red") << "3. " << u.Color("Base") << "Rent a new book" << std::endl;
+  std::cout << u.Color("Red") << "4. " << u.Color("Base") << "Return a book  " << std::endl;
+  std::cout << u.Color("Red") << "5. " << u.Color("Base") << "Log out        " << std::endl;
 }
 
 int MemberSession::userInput() {
@@ -57,7 +48,7 @@ int MemberSession::userInput() {
   return pick;
 }
 
-bool MemberSession::memberSession(Member *member) {
+void MemberSession::memberSession(Member *member) {
   while (1) {
     displayMenu();
 
@@ -65,12 +56,12 @@ bool MemberSession::memberSession(Member *member) {
 
     if (pick == 1) {
       displayTitle("Books in the library:");
-      displayBooks();
+      displayLibraryBooks();
       u.Wait();
 
     } else if (pick == 2) {
       displayTitle("Your books:");
-      memberCheckBooks(member);
+      displayMemberBooks(member);
       u.Wait();
 
     } else if (pick == 3) {
@@ -80,16 +71,13 @@ bool MemberSession::memberSession(Member *member) {
       memberReturn(member);
 
     } else if (pick == 5) {
-      return true;
+      break;
 
-    } else if (pick == 6) {
-      return false;
-    }
+    } 
   }
-  return false;
 }
 
-void MemberSession::displayBooks() {
+void MemberSession::displayLibraryBooks() {
   auto books = library->getBooks();
   for (int i = 0; i < (int)books.size(); i++) {
     auto book = books[i];
@@ -101,7 +89,7 @@ void MemberSession::displayBooks() {
   }
 }
 
-void MemberSession::memberCheckBooks(Member *member) {
+void MemberSession::displayMemberBooks(Member *member) {
   auto books = member->checkBooks();
   for (int i = 0; i < (int)books.size(); i++) {
     auto book = books[i];
@@ -113,8 +101,8 @@ void MemberSession::memberCheckBooks(Member *member) {
 }
 
 void MemberSession::memberRent(Member *member) {
-  displayTitle("Pick a book you want to rent out:");  
-  displayBooks();
+  displayTitle("Pick a book you want to rent out:");
+  displayLibraryBooks();
 
   int pick = userInput();
 
@@ -130,7 +118,7 @@ void MemberSession::memberRent(Member *member) {
 
 void MemberSession::memberReturn(Member *member) {
   displayTitle("Pick a book you want to return:");
-  memberCheckBooks(member);
+  displayMemberBooks(member);
 
   int pick = userInput();
 

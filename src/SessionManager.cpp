@@ -5,27 +5,28 @@ SessionManager::SessionManager(Library &library) { this->library = &library; }
 
 SessionManager::~SessionManager() {}
 
-void SessionManager::startSession(User *user) {
-  u.ClearScreen();
+void SessionManager::startSession() {
+  LoginManager lm(*library);
 
+  User *user;
+ 
+  lm.registerUser();
+  user = lm.loginUser();
+  
   UserType type = user->getType();
 
-  Member *member;
-  Worker *worker;
-  Boss *boss;
-
   if (type == UserType::USER) {
-    member = dynamic_cast<Member *>(user);
+    Member *member = dynamic_cast<Member *>(user);
     MemberSession ms(*library);
 
     ms.memberSession(member);
   }
   if (type == UserType::WORKER) {
-    worker = dynamic_cast<Worker *>(user);
+    Worker *worker = dynamic_cast<Worker *>(user);
     workerSession(worker);
   }
   if (type == UserType::BOSS) {
-    boss = dynamic_cast<Boss *>(user);
+    Boss *boss = dynamic_cast<Boss *>(user);
     bossSession(boss);
   }
 }

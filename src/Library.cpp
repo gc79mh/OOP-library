@@ -5,6 +5,11 @@ Library::Library() {
   users.push_back(new Boss(lastId++, "root", "root"));
 }
 
+Library::Library(std::string rootUsername, std::string rootPassword) {
+  lastId = 0;
+  users.push_back(new Boss(lastId++, rootUsername, rootPassword));
+}
+
 Library::~Library() {
   for (auto &user : users) {
     delete user;

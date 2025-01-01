@@ -6,6 +6,7 @@
 #include "Library.h"
 #include "Utils.h"
 #include "MemberSession.h"
+#include "LoginManager.h"
 
 class SessionManager {
 private:
@@ -16,7 +17,7 @@ public:
   SessionManager (Library &library);
   ~SessionManager ();
 
-  void startSession(User* user);
+  void startSession();
 
   void displayBooks();
   void displayUsers();

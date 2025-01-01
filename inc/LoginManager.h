@@ -5,6 +5,8 @@
 #include "Library.h"
 #include "Utils.h"
 
+#include <sstream>
+
 class LoginManager {
 private:
   Library *library;
@@ -13,10 +15,12 @@ public:
   LoginManager (Library &library);
   ~LoginManager ();
   
-
-  bool checkUser(std::string username, std::string password); 
+  User* loginUser();
+  void registerUser();
+  
+  std::string userInput();
   User* findUser(std::string username, std::string password); 
-  User* loginScreen();
+  User* findUser(std::string username); 
 };
 
 #endif

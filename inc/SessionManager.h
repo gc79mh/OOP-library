@@ -1,10 +1,11 @@
-#ifndef SESSIONMANAGER_H 
-#define SESSIONMANAGER_H
+#ifndef SESSION_MANAGER_H 
+#define SESSION_MANAGER_H
 
 #include "Member.h"
 #include "User.h"
 #include "Library.h"
 #include "Utils.h"
+#include "MemberSession.h"
 
 class SessionManager {
 private:
@@ -19,11 +20,6 @@ public:
 
   void displayBooks();
   void displayUsers();
-
-  bool memberSession(Member* user);
-  void memberCheckBooks(Member* user);
-  void memberRent(Member* user);
-  void memberReturn(Member* user);
 
   bool workerSession(Worker* worker);
 

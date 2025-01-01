@@ -9,6 +9,11 @@ int main() {
   LoginManager lm(lb);
   SessionManager sm(lb);
 
+  lb.addMember("1", "1");
+
+  lb.addBook("Ksiona", "Autor");
+  lb.addBook("Ksiona2", "Autor");
+
   User *currentUser;
   bool sessionContinue;
 

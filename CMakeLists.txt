@@ -44,6 +44,7 @@ set(SOURCES
   ./src/LoginManager.cpp
   ./src/SessionManager.cpp
   ./src/Utils.cpp
+  ./src/MemberSession.cpp
 )
 
 # Test files

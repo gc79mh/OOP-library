@@ -16,84 +16,28 @@ bool SessionManager::startSession(User *user) {
   Worker *worker;
   Boss *boss;
 
-  switch (type) {
-  case UserType::USER:
+  if (type == UserType::USER) {
     member = dynamic_cast<Member *>(user);
-    sessionContinue = memberSession(member);
+    
+    MemberSession ms(*library);
+
+    sessionContinue = ms.memberSession(member);
     return sessionContinue;
-    break;
-  case UserType::WORKER:
+  }
+  if (type == UserType::WORKER) {
     worker = dynamic_cast<Worker *>(user);
     sessionContinue = workerSession(worker);
     return sessionContinue;
-    break;
-  case UserType::BOSS:
+  }
+  if (type == UserType::BOSS) {
     boss = dynamic_cast<Boss *>(user);
     sessionContinue = bossSession(boss);
     return sessionContinue;
-    break;
   }
 
   return false;
 }
 
-bool SessionManager::memberSession(Member *member) {
-  while (1) {
-    u.ClearScreen();
-    /*std::cout << u.Color("Gray") << "Hi " << member->getUsername() <<
-     * u.Color("Base") << std::endl;*/
-    std::cout << u.Color("Yellow") << "Choose an option:   " << u.Color("Base")
-              << std::endl;
-    std::cout << u.Color("Red") << "1. " << u.Color("Base") << "See all books  "
-              << std::endl;
-    std::cout << u.Color("Red") << "2. " << u.Color("Base") << "See my books   "
-              << std::endl;
-    std::cout << u.Color("Red") << "3. " << u.Color("Base") << "Rent a new book"
-              << std::endl;
-    std::cout << u.Color("Red") << "4. " << u.Color("Base") << "Return a book  "
-              << std::endl;
-    std::cout << u.Color("Red") << "5. " << u.Color("Base") << "Log out        "
-              << std::endl;
-    std::cout << u.Color("Red") << "6. " << u.Color("Base") << "Exit           "
-              << std::endl;
-
-    char option;
-    std::cout << ": ";
-    std::cin >> option;
-
-    switch (option) {
-    case '1':
-      u.ClearScreen();
-      std::cout << u.Color("Yellow")
-                << "Books in the library: " << u.Color("Base") << std::endl;
-      displayBooks();
-      u.Wait();
-      break;
-    case '2':
-      u.ClearScreen();
-      std::cout << u.Color("Yellow") << "Your books: " << u.Color("Base")
-                << std::endl;
-      memberCheckBooks(member);
-      u.Wait();
-      break;
-    case '3':
-      memberRent(member);
-      break;
-    case '4':
-      memberReturn(member);
-      break;
-    case '5':
-      return true;
-      break;
-    case '6':
-      return false;
-      break;
-    }
-  }
-  std::cin.ignore(100000, '\n');
-
-  return false;
-}
 void SessionManager::displayBooks() {
   auto books = library->getBooks();
   for (int i = 0; i < (int)books.size(); i++) {
@@ -115,58 +59,6 @@ void SessionManager::displayUsers() {
       std::cout << std::endl;
     }
   }
-}
-
-void SessionManager::memberCheckBooks(Member *member) {
-  auto books = member->checkBooks();
-  for (int i = 0; i < (int)books.size(); i++) {
-    auto book = books[i];
-    std::cout << " " << i + 1 << ". ";
-    std::cout << u.Color("Blue") << book.getTitle() << u.Color("Base");
-    std::cout << " - " << book.getAuthor();
-    std::cout << std::endl;
-  }
-}
-void SessionManager::memberRent(Member *member) {
-  u.ClearScreen();
-
-  std::cout << u.Color("Yellow") << "Pick a book rent: " << u.Color("Base")
-            << std::endl;
-
-  displayBooks();
-
-  std::cout << ": ";
-  int option;
-  std::cin >> option;
-
-  auto books = library->getBooks();
-  if (option - 1 >= (int)books.size() || option < 1)
-    return;
-  auto book = *books[option - 1].first;
-
-  member->borrowBook(book);
-  library->removeBook(book);
-}
-
-void SessionManager::memberReturn(Member *member) {
-  u.ClearScreen();
-
-  std::cout << u.Color("Yellow") << "Pick a book to return: " << u.Color("Base")
-            << std::endl;
-
-  memberCheckBooks(member);
-
-  std::cout << ": ";
-  int option;
-  std::cin >> option;
-
-  auto books = member->checkBooks();
-  if (option - 1 >= (int)books.size() || option < 1)
-    return;
-  auto book = books[option - 1];
-
-  member->returnBook(book);
-  library->addBook(book);
 }
 
 bool SessionManager::workerSession(Worker *worker) {
@@ -249,7 +141,6 @@ void SessionManager::addBook() {
   std::cin.ignore();
   getline(std::cin, title);
   std::cout << "Author: ";
-  std::cin.ignore();
   getline(std::cin, author);
   std::cout << "Count: ";
   std::cin >> count;

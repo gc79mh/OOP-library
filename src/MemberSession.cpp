@@ -2,55 +2,20 @@
 #include <cstdio>
 #include <string>
 
-MemberSession::MemberSession(Library &library) { this->library = &library; }
+MemberSession::MemberSession(Library &library) : Session(library) {
+  color = "Red";
+}
 
 MemberSession::~MemberSession() {}
 
-void MemberSession::displayTitle(std::string title) {
-  u.ClearScreen();
-  std::cout << u.Color("Yellow");
-  std::cout << title;
-  std::cout << u.Color("Base");
-  std::cout << std::endl;
-}
-void MemberSession::displayMenu() {
-  displayTitle("Pick an action: ");
-  std::cout << u.Color("Red") << "1. " << u.Color("Base") << "See all books  " << std::endl;
-  std::cout << u.Color("Red") << "2. " << u.Color("Base") << "See my books   " << std::endl;
-  std::cout << u.Color("Red") << "3. " << u.Color("Base") << "Rent a new book" << std::endl;
-  std::cout << u.Color("Red") << "4. " << u.Color("Base") << "Return a book  " << std::endl;
-  std::cout << u.Color("Red") << "5. " << u.Color("Base") << "Log out        " << std::endl;
-}
-
-int MemberSession::userInput() {
-  std::cout << ": ";
-
-  std::string rawInput;
-
-  std::getline(std::cin, rawInput);
-
-  std::istringstream stream(rawInput);
-
-  std::string rawPick;
-  stream >> rawPick;
-
-  int pick;
-  try {
-    pick = std::stoi(rawPick);
-
-  } catch (std::invalid_argument &) {
-    pick = -1;
-
-  } catch (std::out_of_range &) {
-    pick = -1;
-  }
-
-  return pick;
-}
-
-void MemberSession::memberSession(Member *member) {
+void MemberSession::menu(Member *member) {
   while (1) {
-    displayMenu();
+    displayTitle("Choose: ");
+    displayOption("Available books");
+    displayOption("My books");
+    displayOption("Rent a book");
+    displayOption("Return a book");
+    displayOption("Log out");
 
     int pick = userInput();
 
@@ -72,20 +37,7 @@ void MemberSession::memberSession(Member *member) {
 
     } else if (pick == 5) {
       break;
-
-    } 
-  }
-}
-
-void MemberSession::displayLibraryBooks() {
-  auto books = library->getBooks();
-  for (int i = 0; i < (int)books.size(); i++) {
-    auto book = books[i];
-    std::cout << " " << i + 1 << ". ";
-    std::cout << u.Color("Blue") << book.first->getTitle() << u.Color("Base");
-    std::cout << " - " << book.first->getAuthor();
-    std::cout << u.Color("Gray") << " x" << book.second << u.Color("Base");
-    std::cout << std::endl;
+    }
   }
 }
 

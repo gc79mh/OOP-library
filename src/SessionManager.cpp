@@ -1,7 +1,7 @@
 #include "../inc/SessionManager.h"
 #include <cstdio>
 
-SessionManager::SessionManager(Library &library) : ms(library){
+SessionManager::SessionManager(Library &library) : ms(library) {
   this->library = &library;
   optionNumber = 1;
 }
@@ -45,7 +45,7 @@ void SessionManager::startSession(User *user) {
 
   if (type == UserType::USER) {
     Member *member = dynamic_cast<Member *>(user);
-    ms.memberSession(member);
+    ms.menu(member);
   }
   if (type == UserType::WORKER) {
     Worker *worker = dynamic_cast<Worker *>(user);

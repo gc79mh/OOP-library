@@ -14,20 +14,20 @@ private:
   Utils u;
 
   int optionNumber;
+
   MemberSession ms;
 
 public:
   SessionManager (Library &library);
   ~SessionManager ();
 
-  void menu();
   void startSession(User *user);
+  
+  void menu();
 
   int userInput();
-
   void displayTitle(std::string title);
   void displayOption(std::string text);
-
 
   void displayBooks();
   void displayUsers();

@@ -1,4 +1,0 @@
-/root/OOP-library/build/CMakeFiles/essa.dir
-/root/OOP-library/build/CMakeFiles/essa_tests.dir
-/root/OOP-library/build/CMakeFiles/edit_cache.dir
-/root/OOP-library/build/CMakeFiles/rebuild_cache.dir

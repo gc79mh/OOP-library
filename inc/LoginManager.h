@@ -16,7 +16,7 @@ public:
   ~LoginManager ();
   
   User* loginUser();
-  void registerUser();
+  bool registerUser();
   
   std::string userInput();
   User* findUser(std::string username, std::string password); 

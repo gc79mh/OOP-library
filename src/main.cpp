@@ -10,7 +10,7 @@ int main() {
   lb.addBook("Ksiona", "Autor");
   lb.addBook("Ksiona2", "Autor");
 
-  sm.startSession();
+  sm.menu();
 
   return 0;
 }

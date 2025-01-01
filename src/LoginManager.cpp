@@ -44,21 +44,17 @@ User *LoginManager::loginUser() {
 
   User *user;
 
-  do {
-    u.ClearScreen();
-    std::cout << "Login: ";
-    username = userInput();
-    std::cout << "Password: ";
-    password = userInput();
+  std::cout << "Login: ";
+  username = userInput();
+  std::cout << "Password: ";
+  password = userInput();
 
-    user = findUser(username, password);
-
-  } while (user == nullptr);
+  user = findUser(username, password);
 
   return user;
 }
 
-void LoginManager::registerUser() {
+bool LoginManager::registerUser() {
   Utils u;
 
   std::string username;
@@ -67,26 +63,17 @@ void LoginManager::registerUser() {
   User *user;
   bool taken = false;
 
-  while (1) {
-    u.ClearScreen();
+  std::cout << "New username: ";
+  username = userInput();
+  std::cout << "New password: ";
+  password = userInput();
 
-    if (taken) std::cout << "This login is taken! " << std::endl;
+  user = findUser(username);
 
-    std::cout << "New username: ";
-    username = userInput();
-    std::cout << "New password: ";
-    password = userInput();
-
-    user = findUser(username);
-
-    if(user == nullptr) {
-      break;
-    } else {
-      taken = true; 
-    }
-
+  if (user == nullptr) {
+    library->addMember(username, password);
+  } else {
+    taken = true;
   }
-
-  library->addMember(username, password);
-
+  return taken;
 }

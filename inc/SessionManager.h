@@ -13,15 +13,25 @@ private:
   Library *library;
   Utils u;
 
+  int optionNumber;
+  MemberSession ms;
+
 public:
   SessionManager (Library &library);
   ~SessionManager ();
 
-  void startSession();
+  void menu();
+  void startSession(User *user);
+
+  int userInput();
+
+  void displayTitle(std::string title);
+  void displayOption(std::string text);
+
 
   void displayBooks();
   void displayUsers();
-
+  
   bool workerSession(Worker* worker);
 
   void addMember();

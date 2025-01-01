@@ -1,9 +1,9 @@
 #include "../inc/MainSession.h"
 #include <cstdio>
 
-MainSession::MainSession(Library &library) : ms(library) {
-  this->library = &library;
-  optionNumber = 1;
+MainSession::MainSession(Library *library)
+    : Session(library), ms(library), ws(library) {
+  color = "Red";
 }
 
 MainSession::~MainSession() {}
@@ -12,7 +12,7 @@ void MainSession::start() {
   LoginManager lm(*library);
 
   while (1) {
-    displayTitle("-----Library-----");
+    displayLibrary();
     displayOption("Login");
     displayOption("Register");
     displayOption("Exit");
@@ -20,7 +20,7 @@ void MainSession::start() {
     int pick = userInput();
 
     if (pick == 1) {
-      displayTitle("-----Library-----");
+      displayLibrary();
       User *user = lm.loginUser();
       if (user != nullptr)
         startSession(user);
@@ -28,8 +28,7 @@ void MainSession::start() {
     } else if (pick == 2) {
       bool taken = false;
       do {
-        u.ClearScreen();
-        displayTitle("-----Library-----");
+        displayLibrary();
         if (taken)
           std::cout << "This login is taken! " << std::endl;
         taken = lm.registerUser();
@@ -48,222 +47,12 @@ void MainSession::startSession(User *user) {
     ms.start(member);
   }
   if (type == UserType::WORKER) {
-    Worker *worker = dynamic_cast<Worker *>(user);
-    workerSession(worker);
+    ws.start();
   }
   if (type == UserType::BOSS) {
     Boss *boss = dynamic_cast<Boss *>(user);
     bossSession(boss);
   }
-}
-
-void MainSession::displayTitle(std::string title) {
-  u.ClearScreen();
-  std::cout << u.Color("Red");
-  std::cout << title;
-  std::cout << u.Color("Base");
-  std::cout << std::endl;
-  optionNumber = 1;
-}
-
-void MainSession::displayOption(std::string text) {
-  std::cout << u.Color("Red");
-  std::cout << optionNumber++ << ". ";
-  std::cout << u.Color("Base");
-  std::cout << text;
-  std::cout << std::endl;
-}
-
-int MainSession::userInput() {
-  std::cout << ": ";
-
-  std::string rawInput;
-
-  std::getline(std::cin, rawInput);
-
-  std::istringstream stream(rawInput);
-
-  std::string rawPick;
-  stream >> rawPick;
-
-  int pick;
-  try {
-    pick = std::stoi(rawPick);
-
-  } catch (std::invalid_argument &) {
-    pick = -1;
-
-  } catch (std::out_of_range &) {
-    pick = -1;
-  }
-
-  return pick;
-}
-
-void MainSession::displayBooks() {
-  auto books = library->getBooks();
-  for (int i = 0; i < (int)books.size(); i++) {
-    auto book = books[i];
-    std::cout << " " << i + 1 << ". ";
-    std::cout << u.Color("Blue") << book.first->getTitle() << u.Color("Base");
-    std::cout << " - " << book.first->getAuthor();
-    std::cout << u.Color("Gray") << " x" << book.second << u.Color("Base");
-    std::cout << std::endl;
-  }
-}
-void MainSession::displayUsers() {
-  auto users = library->getUsers();
-  for (auto user : users) {
-    if (user->getType() == UserType::USER) {
-      std::cout << " ID: " << u.Color("Blue") << user->getId()
-                << u.Color("Base") << " - Username: ";
-      std::cout << u.Color("Blue") << user->getUsername() << u.Color("Base");
-      std::cout << std::endl;
-    }
-  }
-}
-
-bool MainSession::workerSession(Worker *worker) {
-  while (1) {
-    u.ClearScreen();
-    std::string s = worker->getUsername();
-
-    std::cout << u.Color("Green") << "Choose an option:   " << u.Color("Base")
-              << std::endl;
-    std::cout << u.Color("Red") << "1. " << u.Color("Base") << "See all books  "
-              << std::endl;
-    std::cout << u.Color("Red") << "2. " << u.Color("Base") << "Add book       "
-              << std::endl;
-    std::cout << u.Color("Red") << "3. " << u.Color("Base") << "Remove book    "
-              << std::endl;
-    std::cout << u.Color("Red") << "4. " << u.Color("Base") << "See all users  "
-              << std::endl;
-    std::cout << u.Color("Red") << "5. " << u.Color("Base") << "Add user       "
-              << std::endl;
-    std::cout << u.Color("Red") << "6. " << u.Color("Base") << "Remove user    "
-              << std::endl;
-    std::cout << u.Color("Red") << "7. " << u.Color("Base") << "Log out        "
-              << std::endl;
-    std::cout << u.Color("Red") << "8. " << u.Color("Base") << "Exit           "
-              << std::endl;
-
-    char option;
-    std::cout << ": ";
-    std::cin >> option;
-
-    switch (option) {
-    case '1':
-      u.ClearScreen();
-      std::cout << u.Color("Green")
-                << "Books in the library: " << u.Color("Base") << std::endl;
-      displayBooks();
-      u.Wait();
-      break;
-    case '2':
-      addBook();
-      break;
-    case '3':
-      removeBook();
-      break;
-    case '4':
-      u.ClearScreen();
-      std::cout << u.Color("Green") << "Registered users: " << u.Color("Base")
-                << std::endl;
-      displayUsers();
-      u.Wait();
-      break;
-    case '5':
-      addMember();
-      break;
-    case '6':
-      removeMember();
-      break;
-    case '7':
-      return true;
-      break;
-    case '8':
-      return false;
-      break;
-    }
-  }
-  std::cin.ignore(100000, '\n');
-
-  return false;
-}
-
-void MainSession::addBook() {
-  u.ClearScreen();
-
-  std::string title;
-  std::string author;
-  int count;
-
-  std::cout << u.Color("Green") << "Add a book: " << u.Color("Base")
-            << std::endl;
-  std::cout << "Title: ";
-  std::cin.ignore();
-  getline(std::cin, title);
-  std::cout << "Author: ";
-  getline(std::cin, author);
-  std::cout << "Count: ";
-  std::cin >> count;
-
-  for (int i = 0; i < count; i++) {
-    library->addBook(title, author);
-  }
-}
-void MainSession::removeBook() {
-  u.ClearScreen();
-
-  int count, option;
-
-  std::cout << u.Color("Green") << "Remove a book: " << u.Color("Base")
-            << std::endl;
-
-  displayBooks();
-
-  std::cout << ": ";
-  std::cin >> option;
-  std::cout << "Count: ";
-  std::cin >> count;
-
-  auto books = library->getBooks();
-  if (count > books[option - 1].second)
-    count = books[option - 1].second;
-  for (int i = 0; i < count; i++) {
-    library->removeBook(books[option - 1].first->getTitle(),
-                        books[option - 1].first->getAuthor());
-  }
-}
-void MainSession::addMember() {
-  u.ClearScreen();
-
-  std::string username;
-  std::string password;
-
-  std::cout << u.Color("Green") << "Add member: " << u.Color("Base")
-            << std::endl;
-  std::cout << "username: ";
-  std::cin >> username;
-  std::cout << "password: ";
-  std::cin >> password;
-
-  library->addMember(username, password);
-}
-void MainSession::removeMember() {
-  u.ClearScreen();
-
-  int id;
-
-  std::cout << u.Color("Green") << "Remove member: " << u.Color("Base")
-            << std::endl;
-
-  displayUsers();
-
-  std::cout << "ID: ";
-  std::cin >> id;
-
-  library->removeUser(id);
 }
 
 bool MainSession::bossSession(Boss *boss) {

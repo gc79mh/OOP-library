@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <string>
 
-MemberSession::MemberSession(Library &library) : Session(library) {
+MemberSession::MemberSession(Library *library) : Session(library) {
   color = "Yellow";
 }
 
@@ -10,21 +10,24 @@ MemberSession::~MemberSession() {}
 
 void MemberSession::start(Member *member) {
   while (1) {
-    displayTitle("Choose: ");
+    displayLibrary();
     displayOption("Available books");
     displayOption("My books");
     displayOption("Rent a book");
     displayOption("Return a book");
+    displaySeparator();
     displayOption("Log out");
 
     int pick = userInput();
 
     if (pick == 1) {
+      displayLibrary();
       displayTitle("Books in the library:");
       displayLibraryBooks();
       u.Wait();
 
     } else if (pick == 2) {
+      displayLibrary();
       displayTitle("Your books:");
       displayMemberBooks(member);
       u.Wait();
@@ -42,7 +45,7 @@ void MemberSession::start(Member *member) {
 }
 
 void MemberSession::displayMemberBooks(Member *member) {
-  auto books = member->checkBooks();
+  auto books = member->getBooks();
   for (int i = 0; i < (int)books.size(); i++) {
     auto book = books[i];
     std::cout << " " << i + 1 << ". ";
@@ -53,6 +56,7 @@ void MemberSession::displayMemberBooks(Member *member) {
 }
 
 void MemberSession::memberRent(Member *member) {
+  displayLibrary();
   displayTitle("Pick a book you want to rent out:");
   displayLibraryBooks();
 
@@ -69,12 +73,13 @@ void MemberSession::memberRent(Member *member) {
 }
 
 void MemberSession::memberReturn(Member *member) {
+  displayLibrary();
   displayTitle("Pick a book you want to return:");
   displayMemberBooks(member);
 
   int pick = userInput();
 
-  auto books = member->checkBooks();
+  auto books = member->getBooks();
   if (pick - 1 >= (int)books.size() || pick < 1)
     return;
 

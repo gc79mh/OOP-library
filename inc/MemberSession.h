@@ -7,7 +7,7 @@
 
 class MemberSession : public Session{
 public:
-  MemberSession (Library &library);
+  MemberSession (Library *library);
   ~MemberSession ();
   
   void start(Member *member);

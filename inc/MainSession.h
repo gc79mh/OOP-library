@@ -7,37 +7,20 @@
 #include "Utils.h"
 #include "MemberSession.h"
 #include "LoginManager.h"
+#include "Session.h"
+#include "WorkerSession.h"
 
-class MainSession {
+class MainSession : public Session{
 private:
-  Library *library;
-  Utils u;
-
-  int optionNumber;
-
   MemberSession ms;
+  WorkerSession ws;
 
 public:
-  MainSession (Library &library);
+  MainSession (Library *library);
   ~MainSession ();
 
-  void startSession(User *user);
-  
   void start();
-
-  int userInput();
-  void displayTitle(std::string title);
-  void displayOption(std::string text);
-
-  void displayBooks();
-  void displayUsers();
-  
-  bool workerSession(Worker* worker);
-
-  void addMember();
-  void removeMember();
-  void addBook();
-  void removeBook();
+  void startSession(User *user);
 
   bool bossSession(Boss* boss);
   

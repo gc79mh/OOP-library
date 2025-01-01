@@ -16,7 +16,7 @@ protected:
   std::string color;
 
 public:
-  Session (Library &library);
+  Session (Library *library);
   ~Session ();
   
   void start();
@@ -24,6 +24,8 @@ public:
   int userInput();
   void displayTitle(std::string title);
   void displayOption(std::string text);
+  void displaySeparator();
+  void displayLibrary();
 
   void displayLibraryBooks();
   void displayLibraryUsers();

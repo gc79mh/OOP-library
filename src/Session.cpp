@@ -1,14 +1,13 @@
 #include "../inc/Session.h"
 
-Session::Session(Library &library) {
-  this->library = &library;
+Session::Session(Library *library) {
+  this->library = library;
   optionNumber = 1;
 }
 
 Session::~Session() {}
 
 void Session::displayTitle(std::string title) {
-  u.ClearScreen();
   std::cout << u.Color(color);
   std::cout << title;
   std::cout << u.Color("Base");
@@ -21,6 +20,19 @@ void Session::displayOption(std::string text) {
   std::cout << optionNumber++ << ". ";
   std::cout << u.Color("Base");
   std::cout << text;
+  std::cout << std::endl;
+}
+
+void Session::displayLibrary() {
+  u.ClearScreen();
+  displayTitle("       Library       ");
+  displaySeparator();
+}
+
+void Session::displaySeparator() {
+  std::cout << u.Color(color);
+  std::cout << "---------------------";
+  std::cout << u.Color("Base");
   std::cout << std::endl;
 }
 

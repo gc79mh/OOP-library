@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-
 # Enable Debugging
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -43,6 +42,7 @@ set(SOURCES
   ./src/Utils.cpp
   ./src/MemberSession.cpp
   ./src/Session.cpp
+  ./src/WorkerSession.cpp
 )
 
 # Test files

@@ -2,33 +2,25 @@
 #define WORKER_SESSION_H
 
 #include "Member.h"
+#include "Session.h"
 #include "User.h"
 #include "Library.h"
 #include "Utils.h"
+#include "Worker.h"
 
 #include <cstdlib>
 #include <sstream>
 
-class WorkerSession {
-private:
-  Library *library;
-  Utils u;
-
+class WorkerSession : public Session{
 public:
-  WorkerSession (Library &library);
+  WorkerSession (Library *library);
   ~WorkerSession ();
   
-  void workerSession(Member* user);
+  void start();
 
-  int userInput();
-
-  void displayMenu();
-  void displayTitle(std::string title);
-  void displayLibraryBooks();
-  void displayMemberBooks(Member* user);
-
-  void memberRent(Member* user);
-  void memberReturn(Member* user);
+  void addBook();
+  void removeBook();
+  void displayUsers();
 
 };
 

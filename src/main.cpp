@@ -5,8 +5,6 @@ int main() {
   Library *library = new Library();
   MainSession session(library);
   
-  library->addWorker("1", "1");
-
   session.start();
 
   delete library;

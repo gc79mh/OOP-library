@@ -1,22 +1,12 @@
-#include "../inc/DebugPrinter.h"
 #include "../inc/Library.h"
-#include "../inc/LoginManager.h"
-#include "../inc/SessionManager.h"
+#include "../inc/MainSession.h"
 
 int main() {
-  DebugPrinter dp;
-  Library lb;
-  LoginManager lm(lb);
-  SessionManager sm(lb);
+  Library *library = new Library();
+  MainSession session(library);
+  
+  session.start();
 
-  User *currentUser;
-  bool sessionContinue;
-
-  do {
-    currentUser = lm.loginScreen();
-    sessionContinue = sm.startSession(currentUser);
-
-  } while (sessionContinue);
-
+  delete library;
   return 0;
 }

@@ -19,6 +19,7 @@ private:
   std::vector<User*> users;
 
 public:
+  Library(std::string rootUsername, std::string rootPassword);
   Library();
   ~Library();
   

@@ -5,7 +5,7 @@ Member::Member(int id, std::string username, std::string password)
 
 Member::~Member() {}
 
-std::vector<Book> Member::checkBooks() const { 
+std::vector<Book> Member::getBooks() const { 
   return borrowedBooks;
 }
 

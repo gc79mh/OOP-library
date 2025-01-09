@@ -6,15 +6,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-
 # Enable Debugging
 set(CMAKE_BUILD_TYPE Debug)
 
 # Add debugging and sanitizer flags
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fsanitize=address")
-
-
-
 
 # Find Google Test
 find_package(GTest REQUIRED)
@@ -42,8 +38,12 @@ set(SOURCES
   ./src/Worker.cpp
   ./src/Boss.cpp
   ./src/LoginManager.cpp
-  ./src/SessionManager.cpp
+  ./src/MainSession.cpp
   ./src/Utils.cpp
+  ./src/MemberSession.cpp
+  ./src/Session.cpp
+  ./src/WorkerSession.cpp
+  ./src/BossSession.cpp
 )
 
 # Test files

@@ -9,7 +9,6 @@ void Utils::ClearScreen() {
 
 void Utils::Wait() {
   std::cin.get();
-  std::cin.ignore(100000, '\n');
 }
 
 std::string Utils::Color(std::string color) {

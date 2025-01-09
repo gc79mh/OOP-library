@@ -14,7 +14,7 @@ public:
   Member(int id, std::string username, std::string password);
   ~Member();
 
-  std::vector<Book> checkBooks() const;
+  std::vector<Book> getBooks() const;
   void borrowBook(Book book);
   void returnBook(Book book);
 

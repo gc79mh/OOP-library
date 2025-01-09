@@ -20,14 +20,14 @@ TEST (MemberTest, BorrowBook) {
 
   member.borrowBook(book1);
   
-  EXPECT_EQ(member.checkBooks().size(), 1); 
-  EXPECT_EQ(member.checkBooks()[0], book1);
+  EXPECT_EQ(member.getBooks().size(), 1); 
+  EXPECT_EQ(member.getBooks()[0], book1);
   
   member.borrowBook(book2);
 
-  EXPECT_EQ(member.checkBooks().size(), 2);
-  EXPECT_EQ(member.checkBooks()[0], book1);
-  EXPECT_EQ(member.checkBooks()[1], book2);
+  EXPECT_EQ(member.getBooks().size(), 2);
+  EXPECT_EQ(member.getBooks()[0], book1);
+  EXPECT_EQ(member.getBooks()[1], book2);
 }
 
 TEST (MemberTest, ReturnBook) {
@@ -38,14 +38,14 @@ TEST (MemberTest, ReturnBook) {
   member.borrowBook(book1);
   member.borrowBook(book2);
   
-  EXPECT_EQ(member.checkBooks().size(), 2);
-  EXPECT_EQ(member.checkBooks()[0], book1);
-  EXPECT_EQ(member.checkBooks()[1], book2);
+  EXPECT_EQ(member.getBooks().size(), 2);
+  EXPECT_EQ(member.getBooks()[0], book1);
+  EXPECT_EQ(member.getBooks()[1], book2);
 
   member.returnBook(book1);
 
-  EXPECT_EQ(member.checkBooks().size(), 1);
-  EXPECT_EQ(member.checkBooks()[0], book2);
+  EXPECT_EQ(member.getBooks().size(), 1);
+  EXPECT_EQ(member.getBooks()[0], book2);
 }
 
 TEST (MemberTest, Comparison) {
